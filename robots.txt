@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://agrounitedsn.netlify.app/sitemap.xml
