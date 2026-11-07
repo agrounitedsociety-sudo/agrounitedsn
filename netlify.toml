@@ -1,0 +1,7 @@
+[build]
+  publish = "."
+
+[[redirects]]
+  from = "/agro%20united.html"
+  to = "/"
+  status = 301
