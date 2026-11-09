@@ -5,7 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Agro United Matériel · Matériel agricole au Sénégal</title>
 <meta name="description" content="Irrigation, pompage solaire, outils, pulvérisation, pépinière et stockage : le matériel agricole sélectionné par Agro United, livré et installé au Sénégal.">
-<link rel="icon" type="image/png" href="favicon.png">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="theme-color" content="#1F4D2B">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Agro United">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Agro United Matériel">
 <meta property="og:title" content="Agro United Matériel · Matériel agricole au Sénégal">
@@ -33,6 +38,11 @@ h1,h2,h3{font-family:var(--font-display);color:var(--green-deep);line-height:1.1
 .btn-green{background:var(--green-deep);color:#fff}
 .btn-ghost{background:transparent;border-color:var(--green-deep);color:var(--green-deep)}
 .btn:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--magenta);outline-offset:2px}
+.card .add[disabled]{opacity:.45;cursor:not-allowed}
+.badge.out{background:#5B665E;color:#fff}
+.install-btn{display:none}
+.install-btn.on{display:inline-flex}
+.foot-links{display:flex;gap:16px;flex-wrap:wrap}
 /* header */
 header.top{position:sticky;top:0;z-index:30;background:rgba(250,246,232,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
 header.top .wrap{display:flex;align-items:center;gap:16px;min-height:68px}
@@ -168,6 +178,8 @@ footer.foot a{color:var(--lime)}
       <a class="hide-sm" href="#services">Services</a>
       <a class="hide-sm" href="#fournisseurs">Devenir fournisseur</a>
       <a class="hide-sm" href="#contact">Contact</a>
+      <a class="hide-sm" href="/agro-united">Notre histoire</a>
+      <button class="btn btn-ghost install-btn" id="install-app" type="button" style="min-height:38px;padding:6px 14px;font-size:14px">Installer l'app</button>
       <button class="cart-btn" id="open-cart" aria-label="Ouvrir le panier"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 4h2l2.4 11.2a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.5L21 8H6"/><circle cx="10" cy="20" r="1.4"/><circle cx="17" cy="20" r="1.4"/></svg>Panier <span class="count" id="cart-count">0</span></button>
     </nav>
   </div>
@@ -266,7 +278,7 @@ footer.foot a{color:var(--lime)}
 </section>
 </main>
 
-<footer class="foot"><div class="wrap"><span>© 2026 Agro United SARL · Thiès · Dakar · Sénégal</span><span>Matériel sélectionné par des agronomes, pour des producteurs.</span></div></footer>
+<footer class="foot"><div class="wrap"><span>© 2026 Agro United SARL · Thiès · Dakar · Sénégal</span><span>Matériel sélectionné par des agronomes, pour des producteurs.</span><span class="foot-links"><a href="/agro-united">Agro United : notre histoire et le guide</a><a href="/admin/">Espace gestion</a></span></div></footer>
 <a class="wa-float" id="wa-float" href="#" target="_blank" rel="noopener" aria-label="Nous écrire sur WhatsApp"><svg width="30" height="30" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.6-.1l2 1c.3.1.5.2.5.3.1.1.1.6-.1 1.2z"/></svg></a>
 
 <div class="overlay" id="overlay"></div>
@@ -308,7 +320,7 @@ const CATEGORIES = {
   irrigation: "Irrigation", pompage: "Pompage et solaire", outils: "Outils", protection: "Pulvérisation et protection",
   pepiniere: "Semences et pépinière", stockage: "Récolte et stockage", mesure: "Mesure et suivi"
 };
-const PRODUITS = [
+let PRODUITS = [
   { id:"kit-gag-1000", nom:"Kit goutte-à-goutte 1 000 m²", cat:"irrigation", prix:0, unite:"kit", vendeur:"Agro United", photo:"", desc:"Kit complet pour 1 000 m² de maraîchage : gaines, filtre, raccords et vannes.", details:["Gaines 16 mm, goutteurs tous les 20 à 30 cm","Filtre à disques et vanne de tête","Installation possible par notre équipe"] },
   { id:"gaine-16", nom:"Gaine goutte-à-goutte 16 mm", cat:"irrigation", prix:0, unite:"rouleau de 1 000 m", vendeur:"Fournisseur partenaire", photo:"", desc:"Gaine souple à goutteurs intégrés, pour lignes de culture.", details:["Écartement des goutteurs à préciser à la commande","Pour tomate, piment, oignon, pastèque"] },
   { id:"filtre-disques", nom:"Filtre à disques 2 pouces", cat:"irrigation", prix:0, unite:"pièce", vendeur:"Fournisseur partenaire", photo:"", desc:"Protège les goutteurs du sable et des impuretés.", details:["Raccord 2 pouces","Nettoyage simple, sans outil"] },
@@ -355,7 +367,8 @@ const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":
 const isAU = p => p.vendeur === "Agro United";
 const priceHTML = p => p.prix ? `<span class="price">${fmtF(p.prix)}</span>` : `<span class="price ask">Prix sur demande</span>`;
 const picHTML = p => p.photo ? `<img src="${esc(p.photo)}" alt="${esc(p.nom)}" loading="lazy">` : (ICONS[p.cat] || ICONS.outils);
-const badgeHTML = p => isAU(p) ? `<span class="badge">Stock Agro United</span>` : `<span class="badge partner">${p.vendeur === "Fournisseur partenaire" ? "Partenaire" : esc(p.vendeur)}</span>`;
+const isOut = p => p.stock === 0;
+const badgeHTML = p => isOut(p) ? `<span class="badge out">Épuisé</span>` : isAU(p) ? `<span class="badge">Stock Agro United</span>` : `<span class="badge partner">${p.vendeur === "Fournisseur partenaire" ? "Partenaire" : esc(p.vendeur)}</span>`;
 const waLink = t => "https://wa.me/" + CONFIG.whatsapp + (t ? "?text=" + encodeURIComponent(t) : "");
 
 // state
@@ -388,7 +401,7 @@ function renderGrid() {
         <span class="cat">${esc(CATEGORIES[p.cat] || "")}</span>
         <h3>${esc(p.nom)}</h3>
         <p>${esc(p.desc)}</p>
-        <div class="foot">${priceHTML(p)}<button class="btn btn-green add" data-add="${p.id}">Ajouter</button></div>
+        <div class="foot">${priceHTML(p)}<button class="btn btn-green add" data-add="${p.id}"${isOut(p) ? " disabled" : ""}>${isOut(p) ? "Épuisé" : "Ajouter"}</button></div>
       </div>
     </article>`).join("") : `<p class="empty">Aucun produit ne correspond. Écrivez-nous : nous trouvons souvent le matériel sur demande.</p>`;
 }
@@ -398,7 +411,7 @@ $("grid").addEventListener("click", e => {
 });
 
 // cart
-function add(id, n = 1) { cart[id] = (cart[id] || 0) + n; save(); renderCart(); toast("Ajouté au panier"); }
+function add(id, n = 1) { const pr = PRODUITS.find(x => x.id === id); if (pr && isOut(pr)) { toast("Produit épuisé"); return; } cart[id] = (cart[id] || 0) + n; save(); renderCart(); toast("Ajouté au panier"); }
 function setQty(id, n) { if (n <= 0) delete cart[id]; else cart[id] = n; save(); renderCart(); }
 function cartItems() { return Object.entries(cart).map(([id, q]) => ({ p: PRODUITS.find(x => x.id === id), q })).filter(x => x.p); }
 function renderCart() {
@@ -422,7 +435,7 @@ $("lines").addEventListener("click", e => {
 });
 function orderText() {
   const items = cartItems();
-  const lines = ["Bonjour Agro United, je souhaite commander du matériel :", ""];
+  const lines = ["Bonjour Agro United, je souhaite commander du matériel :", "Réf. commande : " + orderRef, ""];
   items.forEach(({ p, q }) => lines.push(`• ${q} × ${p.nom} (${p.unite})${p.prix ? " = " + fmtF(p.prix * q) : " · prix sur demande"}`));
   const sum = items.reduce((s, x) => s + (x.p.prix || 0) * x.q, 0);
   lines.push("", "Total : " + (sum ? fmtF(sum) + (items.some(x => !x.p.prix) ? " + articles sur devis" : "") : "sur devis"));
@@ -440,7 +453,30 @@ function validOrder() {
   if (!$("c-nom").value.trim() || !$("c-tel").value.trim()) { $("c-err").textContent = "Indiquez votre nom et votre téléphone pour que nous puissions vous répondre."; return false; }
   $("c-err").textContent = ""; return true;
 }
-["send-wa", "send-mail"].forEach(id => $(id).addEventListener("click", e => { if (!validOrder()) e.preventDefault(); }));
+function newRef() {
+  const d = new Date(), p = n => String(n).padStart(2, "0");
+  const abc = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"; let r = "";
+  const rnd = new Uint32Array(4); (window.crypto || {}).getRandomValues ? crypto.getRandomValues(rnd) : rnd.forEach((_, i) => rnd[i] = Math.random() * 1e9);
+  rnd.forEach(n => r += abc[n % abc.length]);
+  return "AU-" + String(d.getFullYear()).slice(2) + p(d.getMonth() + 1) + p(d.getDate()) + "-" + r;
+}
+let orderRef = sessionStorage.getItem("au-ref") || newRef();
+try { sessionStorage.setItem("au-ref", orderRef); } catch (e) {}
+function saveOrder(canal) {
+  const payload = {
+    reference: orderRef, canal,
+    nom: $("c-nom").value.trim(), telephone: $("c-tel").value.trim(), ville: $("c-ville").value.trim(),
+    livraison: $("c-liv").value, paiement: $("c-pay").value, message: $("c-msg").value.trim(),
+    items: cartItems().map(({ p, q }) => ({ id: p.id, quantite: q }))
+  };
+  try { fetch("/api/orders", { method: "POST", keepalive: true, headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) }).catch(() => {}); } catch (e) {}
+  // Order handed over: start a fresh cart and reference
+  setTimeout(() => {
+    cart = {}; save(); orderRef = newRef(); try { sessionStorage.setItem("au-ref", orderRef); } catch (e) {}
+    renderCart(); closeAll(); toast("Commande enregistrée · réf. " + payload.reference);
+  }, 400);
+}
+[["send-wa", "whatsapp"], ["send-mail", "email"]].forEach(([id, canal]) => $(id).addEventListener("click", e => { if (!validOrder()) { e.preventDefault(); return; } refreshLinks(); saveOrder(canal); }));
 
 // drawer & modal
 let lastFocus = null;
@@ -460,7 +496,7 @@ function openModal(id) {
     ${p.details && p.details.length ? "<ul>" + p.details.map(d => "<li>" + esc(d) + "</li>").join("") + "</ul>" : ""}
     <p style="margin:0;font-size:14px"><b>Vendu par :</b> ${esc(p.vendeur)} · <b>Unité :</b> ${esc(p.unite)}</p>
     <div>${priceHTML(p)}</div>
-    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:6px"><button class="btn btn-primary" id="m-add">Ajouter au panier</button><a class="btn btn-ghost" target="_blank" rel="noopener" href="${waLink("Bonjour Agro United, j'ai une question sur : " + p.nom)}">Poser une question</a></div></div>`;
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:6px"><button class="btn btn-primary" id="m-add"${isOut(p) ? " disabled" : ""}>${isOut(p) ? "Épuisé" : "Ajouter au panier"}</button><a class="btn btn-ghost" target="_blank" rel="noopener" href="${waLink("Bonjour Agro United, j'ai une question sur : " + p.nom)}">Poser une question</a></div></div>`;
   $("modal").classList.add("on"); $("overlay").classList.add("on");
   $("m-add").addEventListener("click", () => { add(p.id); closeAll(); });
   $("close-modal").focus();
@@ -489,6 +525,19 @@ $("mail-display").textContent = CONFIG.email;
 $("main-site").href = CONFIG.siteprincipal; $("main-site").textContent = CONFIG.siteprincipal.replace(/^https?:\/\//, "");
 
 renderCats(); renderGrid(); renderCart();
+
+// Live catalogue from the database (falls back to the list above if offline)
+fetch("/api/products", { headers: { Accept: "application/json" } })
+  .then(r => r.ok ? r.json() : Promise.reject(r.status))
+  .then(list => { if (Array.isArray(list) && list.length) { PRODUITS = list; renderCats(); renderGrid(); renderCart(); } })
+  .catch(() => {});
+
+// Installable app (PWA)
+if ("serviceWorker" in navigator) window.addEventListener("load", () => navigator.serviceWorker.register("/sw.js").catch(() => {}));
+let installEvt = null;
+window.addEventListener("beforeinstallprompt", e => { e.preventDefault(); installEvt = e; $("install-app").classList.add("on"); });
+$("install-app").addEventListener("click", async () => { if (!installEvt) return; installEvt.prompt(); await installEvt.userChoice.catch(() => {}); installEvt = null; $("install-app").classList.remove("on"); });
+window.addEventListener("appinstalled", () => { $("install-app").classList.remove("on"); toast("Application installée"); });
 </script>
 </body>
 </html>

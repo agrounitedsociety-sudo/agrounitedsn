@@ -158,6 +158,11 @@ footer.foot { background: var(--green-deep); color: #C9D8BE; padding: 36px 0; fo
 footer.foot .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; align-items: center; }
 footer.foot a { color: var(--lime); }
 </style>
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="theme-color" content="#1F4D2B">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<link rel="canonical" href="https://agrounitedsn.netlify.app/agro-united">
 </head>
 <body>
 
@@ -169,6 +174,7 @@ footer.foot a { color: var(--lime); }
       <a class="hide-sm" href="#activites">Nos activités</a>
       <a class="hide-sm" href="#guide">Le guide</a>
       <a class="hide-sm" href="#contact">Contact</a>
+      <a class="hide-sm" href="/">Boutique matériel</a>
       <a class="btn btn-primary" href="#commander">Commander le guide</a>
     </nav>
   </div>
@@ -425,5 +431,6 @@ $("copy").addEventListener("click", async () => {
 });
 refresh();
 </script>
+<script>if ("serviceWorker" in navigator) window.addEventListener("load", () => navigator.serviceWorker.register("/sw.js").catch(() => {}));</script>
 </body>
 </html>

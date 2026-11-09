@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Gestion · Agro United Matériel</title>
+<link rel="icon" type="image/png" href="/favicon.png">
+<meta name="theme-color" content="#1F4D2B">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lora:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--green-deep:#1F4D2B;--green:#6BAF3B;--lime:#C8D72E;--magenta:#A3268F;--paper:#FAF6E8;--ink:#1E2A22;--muted:#5B665E;--line:#E2E8D6;--danger:#B3261E}
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,system-ui,sans-serif;color:var(--ink);background:#F6F7F0;line-height:1.5;font-size:15px}
+h1,h2,h3{font-family:Lora,Georgia,serif;color:var(--green-deep);margin:0;line-height:1.2}
+a{color:var(--green-deep)}
+[hidden]{display:none!important}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:40px;padding:8px 16px;border-radius:999px;font-weight:600;font-size:14px;border:2px solid transparent;cursor:pointer;font-family:inherit;text-decoration:none;background:var(--green-deep);color:#fff}
+.btn:disabled{opacity:.6;cursor:wait}
+.btn.primary{background:var(--magenta)}
+.btn.ghost{background:transparent;color:var(--green-deep);border-color:var(--green-deep)}
+.btn.danger{background:transparent;color:var(--danger);border-color:var(--danger)}
+.btn.sm{min-height:32px;padding:4px 12px;font-size:13px}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,a:focus-visible{outline:3px solid var(--magenta);outline-offset:2px}
+label{display:block;font-weight:600;font-size:13px;margin-bottom:4px}
+input,select,textarea{width:100%;font:inherit;padding:9px 12px;border:1px solid #C9D2BC;border-radius:10px;background:#fff;color:var(--ink)}
+textarea{min-height:80px;resize:vertical}
+.err{color:var(--danger);font-size:14px;margin:0;min-height:1em}
+.ok{color:#2F6B1F;font-size:14px;margin:0}
+/* auth */
+.auth{min-height:100vh;display:grid;place-items:center;padding:24px;background:linear-gradient(160deg,var(--paper),#EAF1DA)}
+.auth .box{width:100%;max-width:400px;background:#fff;border:1px solid var(--line);border-radius:20px;padding:28px;display:grid;gap:14px;box-shadow:0 10px 40px rgba(31,77,43,.08)}
+.auth .brand{display:flex;align-items:center;gap:10px;font-weight:800;color:var(--green-deep)}
+.auth .brand img{width:40px;height:40px}
+.auth p.sub{margin:0;color:var(--muted);font-size:14px}
+.linkbtn{background:none;border:0;padding:0;color:var(--green-deep);text-decoration:underline;cursor:pointer;font:inherit;font-size:14px}
+.auth .alt{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+/* app */
+header.top{background:var(--green-deep);color:#fff;position:sticky;top:0;z-index:10}
+header.top .wrap{display:flex;align-items:center;gap:16px;min-height:60px;flex-wrap:wrap}
+header.top .brand{font-weight:800;display:flex;align-items:center;gap:10px;color:#fff;text-decoration:none}
+header.top .brand img{width:32px;height:32px;background:#fff;border-radius:8px}
+header.top .who{margin-left:auto;font-size:13px;color:#C9D8BE}
+header.top .btn{background:transparent;border-color:#C9D8BE;color:#fff}
+.tabs{display:flex;gap:6px;margin:22px 0 16px;border-bottom:1px solid var(--line)}
+.tabs button{background:none;border:0;padding:10px 16px;font:inherit;font-weight:600;color:var(--muted);cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-1px}
+.tabs button[aria-selected="true"]{color:var(--green-deep);border-color:var(--magenta)}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:16px}
+.stat{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 16px;text-align:left;cursor:pointer;font:inherit;color:inherit}
+.stat[aria-pressed="true"]{border-color:var(--magenta);box-shadow:0 0 0 2px rgba(163,38,143,.15)}
+.stat .n{font-size:26px;font-weight:800;color:var(--green-deep);font-family:Lora,serif}
+.stat .l{font-size:13px;color:var(--muted)}
+.bar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:14px}
+.bar input{max-width:320px}
+.bar .count{color:var(--muted);font-size:14px;margin-left:auto}
+.orders{display:grid;gap:12px;padding-bottom:40px}
+.order{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px 18px;display:grid;gap:10px}
+.order .head{display:flex;gap:12px;align-items:baseline;flex-wrap:wrap}
+.order .ref{font-weight:800;font-family:ui-monospace,monospace;color:var(--green-deep)}
+.order .date{color:var(--muted);font-size:13px}
+.order .total{margin-left:auto;font-weight:700}
+.order .meta{display:flex;gap:6px 18px;flex-wrap:wrap;font-size:14px;color:var(--muted)}
+.order .meta b{color:var(--ink);font-weight:600}
+.order table{width:100%;border-collapse:collapse;font-size:14px}
+.order td{padding:6px 0;border-top:1px solid var(--line)}
+.order td.r{text-align:right;white-space:nowrap}
+.order .msg{background:var(--paper);border-radius:10px;padding:8px 12px;font-size:14px;margin:0;white-space:pre-wrap}
+.order .ctrl{display:grid;grid-template-columns:200px 1fr auto;gap:10px;align-items:end}
+.pill{display:inline-block;padding:2px 10px;border-radius:999px;font-size:12px;font-weight:700}
+.s-nouvelle{background:#FBE8F7;color:var(--magenta)}
+.s-confirmee{background:#E3F0FA;color:#1D5B8A}
+.s-livree{background:#E6F3DC;color:#2F6B1F}
+.s-annulee{background:#EEE;color:#555}
+table.products{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;font-size:14px;margin-bottom:40px}
+table.products th,table.products td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--line);vertical-align:middle}
+table.products th{background:var(--paper);font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
+table.products tr.off td{opacity:.55}
+table.products td.num{white-space:nowrap}
+.empty{background:#fff;border:1px dashed #C9D2BC;border-radius:16px;padding:30px;text-align:center;color:var(--muted)}
+dialog{border:0;border-radius:20px;padding:0;width:min(640px,94vw);box-shadow:0 20px 60px rgba(0,0,0,.25)}
+dialog::backdrop{background:rgba(20,30,22,.5)}
+dialog form{padding:22px;display:grid;gap:12px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.check{display:flex;gap:8px;align-items:center;font-weight:600}
+.check input{width:auto}
+.hint{font-size:12px;color:var(--muted);margin:2px 0 0}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(120px);background:var(--ink);color:#fff;padding:10px 18px;border-radius:999px;font-size:14px;transition:transform .2s;z-index:50}
+.toast.on{transform:translateX(-50%) translateY(0)}
+@media (max-width:700px){.order .ctrl{grid-template-columns:1fr}.grid2{grid-template-columns:1fr}table.products .hide-sm{display:none}.order .total{margin-left:0}}
+</style>
+</head>
+<body>
+
+<section class="auth" id="auth-view" hidden>
+  <div class="box">
+    <div class="brand"><img src="/favicon.png" alt=""> Agro United · Gestion</div>
+
+    <form id="login-form" novalidate>
+      <h1 style="font-size:24px;margin-bottom:6px">Connexion</h1>
+      <p class="sub" style="margin-bottom:14px">Espace réservé à l'équipe Agro United.</p>
+      <div style="display:grid;gap:12px">
+        <div><label for="l-email">E-mail</label><input id="l-email" type="email" autocomplete="email" required></div>
+        <div><label for="l-pass">Mot de passe</label><input id="l-pass" type="password" autocomplete="current-password" required></div>
+        <p class="err" id="l-err" role="alert"></p>
+        <button class="btn primary" type="submit">Se connecter</button>
+        <div class="alt"><button class="linkbtn" type="button" data-show="signup-form">Créer le compte</button><button class="linkbtn" type="button" data-show="forgot-form">Mot de passe oublié ?</button></div>
+      </div>
+    </form>
+
+    <form id="signup-form" novalidate hidden>
+      <h1 style="font-size:24px;margin-bottom:6px">Créer le compte</h1>
+      <p class="sub" style="margin-bottom:14px">Seules les adresses e-mail autorisées peuvent créer un compte de gestion.</p>
+      <div style="display:grid;gap:12px">
+        <div><label for="s-email">E-mail</label><input id="s-email" type="email" autocomplete="email" required></div>
+        <div><label for="s-pass">Mot de passe (8 caractères minimum)</label><input id="s-pass" type="password" autocomplete="new-password" minlength="8" required></div>
+        <p class="err" id="s-err" role="alert"></p>
+        <p class="ok" id="s-ok" role="status"></p>
+        <button class="btn primary" type="submit">Créer le compte</button>
+        <div class="alt"><button class="linkbtn" type="button" data-show="login-form">J'ai déjà un compte</button></div>
+      </div>
+    </form>
+
+    <form id="forgot-form" novalidate hidden>
+      <h1 style="font-size:24px;margin-bottom:6px">Mot de passe oublié</h1>
+      <p class="sub" style="margin-bottom:14px">Recevez un lien par e-mail pour choisir un nouveau mot de passe.</p>
+      <div style="display:grid;gap:12px">
+        <div><label for="f-email">E-mail</label><input id="f-email" type="email" autocomplete="email" required></div>
+        <p class="err" id="f-err" role="alert"></p>
+        <p class="ok" id="f-ok" role="status"></p>
+        <button class="btn primary" type="submit">Envoyer le lien</button>
+        <div class="alt"><button class="linkbtn" type="button" data-show="login-form">Retour à la connexion</button></div>
+      </div>
+    </form>
+
+    <form id="password-form" novalidate hidden>
+      <h1 style="font-size:24px;margin-bottom:6px">Nouveau mot de passe</h1>
+      <p class="sub" style="margin-bottom:14px" id="pw-sub">Choisissez votre mot de passe.</p>
+      <div style="display:grid;gap:12px">
+        <div><label for="n-pass">Mot de passe (8 caractères minimum)</label><input id="n-pass" type="password" autocomplete="new-password" minlength="8" required></div>
+        <p class="err" id="n-err" role="alert"></p>
+        <button class="btn primary" type="submit">Enregistrer</button>
+      </div>
+    </form>
+
+    <p class="sub"><a href="/">← Retour à la boutique</a></p>
+  </div>
+</section>
+
+<div id="app-view" hidden>
+  <header class="top"><div class="wrap">
+    <a class="brand" href="/admin/"><img src="/favicon.png" alt=""> Agro United · Gestion</a>
+    <span class="who" id="who"></span>
+    <a class="btn sm" href="/" target="_blank" rel="noopener">Voir la boutique</a>
+    <button class="btn sm" id="logout" type="button">Déconnexion</button>
+  </div></header>
+
+  <main class="wrap">
+    <div class="tabs" role="tablist">
+      <button role="tab" id="tab-orders" aria-selected="true" aria-controls="panel-orders">Commandes</button>
+      <button role="tab" id="tab-products" aria-selected="false" aria-controls="panel-products">Produits</button>
+    </div>
+
+    <section id="panel-orders" role="tabpanel" aria-labelledby="tab-orders">
+      <div class="stats" id="stats"></div>
+      <div class="bar">
+        <input type="search" id="o-q" placeholder="Rechercher : nom, téléphone, référence…" aria-label="Rechercher une commande">
+        <button class="btn ghost sm" id="o-refresh" type="button">Actualiser</button>
+        <span class="count" id="o-count"></span>
+      </div>
+      <div class="orders" id="orders"></div>
+    </section>
+
+    <section id="panel-products" role="tabpanel" aria-labelledby="tab-products" hidden>
+      <div class="bar">
+        <input type="search" id="p-q" placeholder="Rechercher un produit…" aria-label="Rechercher un produit">
+        <button class="btn primary sm" id="p-new" type="button">+ Nouveau produit</button>
+        <span class="count" id="p-count"></span>
+      </div>
+      <div id="products"></div>
+    </section>
+  </main>
+</div>
+
+<dialog id="p-dialog" aria-labelledby="p-title">
+  <form id="p-form" method="dialog" novalidate>
+    <h2 id="p-title" style="font-size:22px">Produit</h2>
+    <div><label for="f-nom">Nom</label><input id="f-nom" required maxlength="160"></div>
+    <div class="grid2">
+      <div><label for="f-cat">Catégorie</label><select id="f-cat"></select></div>
+      <div><label for="f-vendeur">Vendu par</label><input id="f-vendeur" list="vendeurs" maxlength="120"><datalist id="vendeurs"><option value="Agro United"><option value="Fournisseur partenaire"></datalist></div>
+    </div>
+    <div class="grid2">
+      <div><label for="f-prix">Prix (FCFA)</label><input id="f-prix" type="number" min="0" step="1" inputmode="numeric"><p class="hint">0 = « Prix sur demande »</p></div>
+      <div><label for="f-unite">Unité</label><input id="f-unite" maxlength="80" placeholder="pièce, kit, rouleau de 100 m…"></div>
+    </div>
+    <div class="grid2">
+      <div><label for="f-stock">Stock</label><input id="f-stock" type="number" min="0" step="1" inputmode="numeric"><p class="hint">Vide = non suivi · 0 = affiché « Épuisé »</p></div>
+      <div><label for="f-position">Ordre d'affichage</label><input id="f-position" type="number" min="0" step="1"></div>
+    </div>
+    <div><label for="f-photo">Photo (lien)</label><input id="f-photo" type="url" placeholder="https://…" maxlength="1000"><p class="hint">Laissez vide pour l'illustration par défaut.</p></div>
+    <div><label for="f-desc">Description courte</label><textarea id="f-desc" maxlength="2000"></textarea></div>
+    <div><label for="f-details">Points clés (un par ligne)</label><textarea id="f-details"></textarea></div>
+    <label class="check"><input type="checkbox" id="f-active"> Visible dans la boutique</label>
+    <p class="err" id="p-err" role="alert"></p>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <button class="btn primary" type="submit" id="p-save">Enregistrer</button>
+      <button class="btn ghost" type="button" id="p-cancel">Annuler</button>
+      <button class="btn danger" type="button" id="p-delete" style="margin-left:auto">Supprimer</button>
+    </div>
+  </form>
+</dialog>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script type="module" src="/admin/admin.js"></script>
+</body>
+</html>

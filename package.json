@@ -1,0 +1,21 @@
+{
+  "name": "agrounitedsn",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "esbuild src/admin.js --bundle --minify --format=esm --target=es2020 --outfile=public/admin/admin.js",
+    "db:generate": "drizzle-kit generate"
+  },
+  "dependencies": {
+    "@netlify/database": "^2.0.3",
+    "@netlify/functions": "^6.1.1",
+    "@netlify/identity": "^2.0.1",
+    "drizzle-orm": "^1.0.0-beta.22",
+    "esbuild": "^0.28.2"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.6",
+    "drizzle-kit": "^1.0.0-beta.22",
+    "typescript": "^7.0.2"
+  }
+}
