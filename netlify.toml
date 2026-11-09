@@ -1,0 +1,34 @@
+[build]
+  command = "npm run build"
+  publish = "public"
+
+[functions]
+  node_bundler = "esbuild"
+
+# Old file name of the story page
+[[redirects]]
+  from = "/agro%20united.html"
+  to = "/agro-united"
+  status = 301
+
+[[redirects]]
+  from = "/agro united.html"
+  to = "/agro-united"
+  status = 301
+
+[[headers]]
+  for = "/sw.js"
+  [headers.values]
+    Cache-Control = "no-cache"
+    Service-Worker-Allowed = "/"
+
+[[headers]]
+  for = "/manifest.webmanifest"
+  [headers.values]
+    Content-Type = "application/manifest+json"
+
+[[headers]]
+  for = "/admin/*"
+  [headers.values]
+    X-Robots-Tag = "noindex"
+    Cache-Control = "no-cache"
